@@ -167,6 +167,8 @@ open class BMPlayerLayerView: UIView {
     // MARK: - layoutSubviews
     override open func layoutSubviews() {
         super.layoutSubviews()
+        CATransaction.begin()
+        CATransaction.setValue(true, forKey: kCATransactionDisableActions)
         switch self.aspectRatio {
         case .default:
             self.playerLayer?.videoGravity = "AVLayerVideoGravityResizeAspect"
@@ -182,6 +184,7 @@ open class BMPlayerLayerView: UIView {
             self.playerLayer?.frame = CGRect(x: (self.bounds.width - _w )/2, y: 0, width: _w, height: self.bounds.height)
             break
         }
+        CATransaction.commit()
     }
     
     open func resetPlayer() {
